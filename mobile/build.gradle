@@ -1,0 +1,104 @@
+plugins {
+    id("org.jetbrains.kotlin.plugin.compose") version "$kotlinVersion"
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.devtools.ksp'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    compileSdk rootProject.ext.compileSdkVersion
+
+    namespace 'com.ianhanniballake.contractiontimer'
+
+    buildFeatures {
+        compose true
+    }
+
+    defaultConfig {
+        applicationId "com.josephsantiago.partofacilapp"
+
+        def versionMajor = 2
+        def versionMinor = 4
+        def versionPatch = 2
+        def versionBuild = 0
+        def betaVersion = 0
+
+        minSdkVersion 24
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        multiDexEnabled true
+        versionCode versionMajor * 10000000 + versionMinor * 100000 + versionPatch * 1000 + versionBuild
+        versionName "${versionMajor}.${versionMinor}" +
+                (versionPatch > 0 ? ".${versionPatch}" : "") +
+                (betaVersion > 0 ? ", Beta ${betaVersion}" : "")
+
+        def filesAuthorityValue = "com.josephsantiago.partofacilapp.files"
+        manifestPlaceholders = [filesAuthority: filesAuthorityValue]
+        buildConfigField "String", "FILES_AUTHORITY", "\"${filesAuthorityValue}\""
+
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.generateKotlin", "true")
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("/home/developer/.config/partofacil-android/upload-keystore.jks")
+            storePassword "partofacil2026"
+            keyAlias "upload"
+            keyPassword "partofacil2026"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation 'androidx.activity:activity-compose:1.10.0'
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation "androidx.fragment:fragment-compose:1.8.5"
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
+    implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
+    ksp 'androidx.room:room-compiler:2.6.1'
+    implementation "com.google.firebase:firebase-analytics-ktx:22.1.2"
+    implementation "com.google.firebase:firebase-crashlytics-ktx:19.3.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-compose:2.8.7"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7"
+    def composeBom = platform('androidx.compose:compose-bom:2024.12.01')
+    implementation composeBom
+    androidTestImplementation composeBom
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.material:material-icons-core'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation("com.opencsv:opencsv:3.8") {
+        exclude group: 'commons-beanutils', module: 'commons-beanutils'
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'

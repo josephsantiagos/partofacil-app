@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <bool name="detail_appwidget_enabled">false</bool>
+    <bool name="pref_keep_screen_on_default">false</bool>
+    <bool name="pref_lock_portrait_default">false</bool>
+    <bool name="pref_notification_enable_default">true</bool>
+
+</resources>

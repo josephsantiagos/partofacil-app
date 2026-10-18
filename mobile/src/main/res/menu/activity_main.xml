@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_action_share"
+        android:title="@string/menu_share"
+        app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/menu_add"
+        android:title="@string/menu_add"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_settings"
+        android:menuCategory="secondary"
+        android:title="@string/menu_settings"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_donate"
+        android:menuCategory="secondary"
+        android:title="@string/menu_donate"
+        app:showAsAction="never"/>
+
+</menu>

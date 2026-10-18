@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="appwidget_padding">5dp</dimen>
+    <dimen name="list_fab_padding">56dp</dimen>
+    <dimen name="dialog_padding">10dp</dimen>
+    <dimen name="shape_corner_radius">10dp</dimen>
+    <dimen name="outer_padding">8dp</dimen>
+    <dimen name="indent_padding">25dp</dimen>
+    <dimen name="dividing_padding">10dp</dimen>
+    <dimen name="popup_menu_width">56dp</dimen>
+    <dimen name="action_bar_elevation">8dp</dimen>
+
+</resources>
